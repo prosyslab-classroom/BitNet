@@ -21,7 +21,6 @@ def run_server():
             server_path = os.path.join(build_dir, "bin", "llama-server")
     else:
         server_path = os.path.join(build_dir, "bin", "llama-server")
-    
     command = [
         f'{server_path}',
         '-m', args.model,
@@ -34,12 +33,16 @@ def run_server():
         '--port', str(args.port),
         '-cb'  # Enable continuous batching
     ]
-    
     if args.prompt:
         command.extend(['-p', args.prompt])
-    
+
+    if args.grammar_file:
+        command.extend(["--grammar-file", args.grammar_file])
+
+    if args.verbose:
+        command.extend(["--verbose"])
+
     # Note: -cnv flag is removed as it's not supported by the server
-    
     print(f"Starting server on {args.host}:{args.port}")
     run_command(command)
 
@@ -49,7 +52,7 @@ def signal_handler(sig, frame):
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, signal_handler)
-    
+
     parser = argparse.ArgumentParser(description='Run llama.cpp server')
     parser.add_argument("-m", "--model", type=str, help="Path to model file", required=False, default="models/bitnet_b1_58-3B/ggml-model-i2_s.gguf")
     parser.add_argument("-p", "--prompt", type=str, help="System prompt for the model", required=False)
@@ -59,6 +62,8 @@ if __name__ == "__main__":
     parser.add_argument("--temperature", type=float, help="Temperature for sampling", required=False, default=0.8)
     parser.add_argument("--host", type=str, help="IP address to listen on", required=False, default="127.0.0.1")
     parser.add_argument("--port", type=int, help="Port to listen on", required=False, default=8080)
-    
+    parser.add_argument("-g", "--grammar-file", type=str, help="Path to grammar file", required=False)
+    parser.add_argument("-v", "--verbose", type=str, help="Verbose", required=False)
+
     args = parser.parse_args()
     run_server()
