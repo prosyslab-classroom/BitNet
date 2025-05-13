@@ -1,0 +1,9 @@
+[style]
+based_on_style = pep8
+
+indent_width = 4
+split_before_expression_after_opening_paren = false
+each_dict_entry_on_separate_line = false
+coalesce_brackets = true
+allow_multiline_list_literals = true
+split_complex_comprehension = false
