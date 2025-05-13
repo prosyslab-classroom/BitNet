@@ -34,6 +34,9 @@ def run_inference():
     ]
     if args.conversation:
         command.append("-cnv")
+
+    if args.grammar_file:
+        command.extend(["--grammar-file", args.grammar_file])
     run_command(command)
 
 def signal_handler(sig, frame):
@@ -51,6 +54,7 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--ctx-size", type=int, help="Size of the prompt context", required=False, default=2048)
     parser.add_argument("-temp", "--temperature", type=float, help="Temperature, a hyperparameter that controls the randomness of the generated text", required=False, default=0.8)
     parser.add_argument("-cnv", "--conversation", action='store_true', help="Whether to enable chat mode or not (for instruct models.)")
+    parser.add_argument("-g", "--grammar-file", type=str, help="Path to grammar file", required=False)
 
     args = parser.parse_args()
     run_inference()
