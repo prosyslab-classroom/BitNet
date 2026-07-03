@@ -1,5 +1,5 @@
 #!/bin/bash
-BITNET_DIR="/BitNet"
+BITNET_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 MODEL_PATH="$BITNET_DIR/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf"
 
 # Parse command line arguments
@@ -30,5 +30,5 @@ if [ ! -f "$MODEL_PATH" ]; then
 fi
 
 # Run the inference server
-cd $BITNET_DIR
+cd "$BITNET_DIR"
 python3 "$BITNET_DIR/run_inference_server.py" -m "$MODEL_PATH" -n "$NUM_TOKENS"
