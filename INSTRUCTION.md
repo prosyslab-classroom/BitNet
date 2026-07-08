@@ -11,10 +11,11 @@ If `hf` (hugging-face cli) is not available, you can download it via:
 curl -LsSf https://hf.co/cli/install.sh | bash
 ```
 
-We provide a conveninent wrapper to launch a BitNet server:
+We provide a conveninent wrapper to launch a BitNet server and conversation client:
 
 ```sh
-./run_inference.sh -n 128
+./run_inference_server.sh -n 128  # server
+./run_inference.sh -p "You are a software engineer" -n 128         # client
 ```
 
-This internally runs [run_inference_server.py] that spawns a `llama-server` of the BitNet model.
+This internally runs [run_inference.py] and [run_inference_server.py] that spawns a `llama-server` of the BitNet model.

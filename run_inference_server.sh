@@ -3,18 +3,14 @@ BITNET_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 MODEL_PATH="$BITNET_DIR/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf"
 
 # Parse command line arguments
-while getopts "n:p:" opt; do
+while getopts "n:" opt; do
   case $opt in
     n)
       NUM_TOKENS="$OPTARG"
       ;;
-    p)
-      PROMPT="$OPTARG"
-      ;;
     \?)
-      echo "Usage: $0 -n <int> -p <prompt>"
+      echo "Usage: $0 -n <int>"
       echo "  -n <int>  Number of tokens"
-      echo "  -p <string>  Prompt to use for inference"
       exit 1
       ;;
   esac
@@ -27,13 +23,6 @@ if [ -z "$NUM_TOKENS" ]; then
   exit 1
 fi
 
-# Check if -p argument was provided
-if [ -z "$PROMPT" ]; then
-  echo "Error: -p argument is required"
-  echo "Usage: $0 -p <string>"
-  exit 1
-fi
-
 # Check if the model path exists
 if [ ! -f "$MODEL_PATH" ]; then
   echo "Error: Model does not exist. Please run \`hf microsoft/BitNet-b1.58-2B-4T-gguf --local-dir <path>\` to download the model."
@@ -42,4 +31,4 @@ fi
 
 # Run the inference server
 cd "$BITNET_DIR"
-python3 "$BITNET_DIR/run_inference.py" -m "$MODEL_PATH" -cnv -p "$PROMPT" -n "$NUM_TOKENS"
+python3 "$BITNET_DIR/run_inference_server.py" -m "$MODEL_PATH" -n "$NUM_TOKENS"
