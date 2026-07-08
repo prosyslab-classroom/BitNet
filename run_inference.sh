@@ -1,6 +1,9 @@
 #!/bin/bash
 BITNET_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 MODEL_PATH="$BITNET_DIR/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf"
+#MODEL_PATH="$BITNET_DIR/models/Qwen2.5-Coder-1.5B-Instruct/qwen2.5-coder-1.5b-instruct-q6_k.gguf"
+#MODEL_PATH="$BITNET_DIR/models/Qwen2.5-Coder-1.5B-Instruct/qwen2.5-coder-1.5b-instruct-q4_k_m.gguf"
+#MODEL_PATH="$BITNET_DIR/models/Qwen2.5-Coder-1.5B-Instruct/qwen2.5-coder-1.5b-instruct-q2_k.gguf"
 
 # Parse command line arguments
 while getopts "n:p:" opt; do

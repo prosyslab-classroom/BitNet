@@ -1,9 +1,10 @@
 # Quick Start
 
-Please download the BitNet model:
+Please download the BitNet model (or alternative models):
 
 ```sh
 hf download microsoft/BitNet-b1.58-2B-4T-gguf --local-dir models/BitNet-b1.58-2B-4T
+hf download Qwen/Qwen2.5-Coder-1.5B-Instruct-GGUF --local-dir models/Qwen2.5-Coder-1.5B-Instruct
 ```
 
 If `hf` (hugging-face cli) is not available, you can download it via:
